@@ -13,8 +13,8 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/dashboard', function () {
+Route::get('/{catchall?}', function () {
     return view('vue');
-});
+})->where('catchall', '^(?!api).*$')->name('administration');
 
 Auth::routes();

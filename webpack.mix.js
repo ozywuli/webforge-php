@@ -23,6 +23,7 @@ if (mix.inProduction()) {
     mix.version();
 } else {
     mix.browserSync({
+        open: false,
         proxy: process.env.APP_URL + ':' + '8000'
     });
 }
