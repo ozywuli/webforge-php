@@ -7,12 +7,16 @@
 require('./bootstrap');
 
 import Vue from 'vue';
+import Element from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+import App from './components/App';
 import router from './router';
 
 // Vue config
 Vue.config.productionTip = false;
 
-let App = Vue.component('App', require('./components/App.vue'));
+// Use Element UI
+Vue.use(Element);
 
 // Initialize Vue
 new Vue({
