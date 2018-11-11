@@ -15,13 +15,15 @@
 // import idMixin from '../../mixins/id';
 
 export default {
+    beforeCreate() {
+        this.id = 1;
+    },
     mounted() {
-        let inputs = document.querySelectorAll('.input-group');
-        console.log(inputs);
-
-        window.onbeforeunload = function() {
-        return "Data will be lost if you leave the page, are you sure?";
-        };
+        if (process.env.NODE_ENV === 'production') {
+            window.onbeforeunload = function() {
+                return "Data will be lost if you leave the page, are you sure?";
+            };
+        }
     },
     computed: {
         id: {
@@ -29,7 +31,7 @@ export default {
                 return this.$route.params.id;
             },
             set(counter) {
-                console.log(counter);
+                // console.log(counter);
                 this.$router.push({ 
                     path: `/dashboard/questionnaire/${counter}` 
                 })

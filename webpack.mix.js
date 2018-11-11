@@ -15,11 +15,26 @@ const atImport = require('postcss-import');
 
 mix
     .js('resources/js/app.js', 'public/js')
+    .sourceMaps()
     .postCss('resources/css/app.css', 'public/css', [
         atImport(),
         tailwindcss('./tailwind.js')
-    ]);
+    ])
+    .sourceMaps()
 
+console.log(JSON.stringify(process.env.NODE_ENV));
+
+mix.webpackConfig(webpack => {
+    return {
+        plugins: [
+            new webpack.DefinePlugin({
+                'process.env': {
+                    NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+                }
+            })
+        ]
+    };
+});
 
 if (mix.inProduction()) {
     mix.version();
