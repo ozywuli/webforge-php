@@ -11,7 +11,12 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', function() {
+    return view('welcome');
+});
+
+Route::get('/login', 'HomeController@index')->name('home');
+Route::get('/register', 'HomeController@index')->name('home');
 
 Route::get('/{catchall?}', function () {
     return view('vue');

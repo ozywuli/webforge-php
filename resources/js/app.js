@@ -11,6 +11,7 @@ import Element from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import App from './components/App';
 import router from './router';
+import store from './store';
 
 // Vue config
 Vue.config.productionTip = false;
@@ -21,6 +22,7 @@ Vue.use(Element);
 // Initialize Vue
 new Vue({
     router,
+    store,
     el: '#vue-app',
     render: h => h(App)
-})
+});
