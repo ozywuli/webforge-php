@@ -17,5 +17,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/social/store', 'SocialController@store');
+// Route::middleware('auth:api')->post('/social/store', 'SocialController@store');
+
+Route::post('login', 'api\PassportController@login');
+ 
+Route::post('register', 'api\PassportController@register');
+ 
+Route::group(['middleware' => 'auth:api'], function(){
+    Route::get('get-details', 'api\PassportController@getDetails');
+});
 

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
 
 class LoginController extends Controller
 {
@@ -35,5 +38,14 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    // https://laracasts.com/discuss/channels/laravel/how-to-change-the-code-for-the-built-in-authentication-in-laravel?page=1
+    protected function authenticated(Request $request, $user)
+    {
+        $user = Auth::user();
+        $success['token'] =  $user->createToken('MyApp')->accessToken;
+
+        $request->session()->put('passportToken', json_encode($success));
     }
 }

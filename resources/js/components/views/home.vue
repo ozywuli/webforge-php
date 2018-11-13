@@ -1,27 +1,46 @@
 <template>
     <div class="home">
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae, aliquid nisi hic rem exercitationem quidem molestias modi impedit fuga voluptatibus veniam? Officia nostrum vero, magni asperiores velit nulla at excepturi!</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis saepe enim nesciunt modi explicabo ipsam id, eos doloremque earum, eius deserunt atque perferendis. Minus eaque porro numquam explicabo, earum autem.</p>
-        {{count}}
-        <el-button @click="INCREMENT_COUNTER">increment</el-button>
+        <el-form>
+            <el-input placeholder="Name" v-model="form.name"></el-input>
+            <el-input placeholder="URL" v-model="form.url"></el-input>
+            <el-button type="primary" @click="onSubmit">Create</el-button>
+        </el-form>
     </div>
 </template>
 
 <script>
-import {
-    mapActions,
-    mapState
-} from 'vuex';
+import axios from 'axios';
 
 export default {
-  computed: {
-      ...mapState([
-          'count'
-      ])
-  },
-  methods: mapActions([
-      'INCREMENT_COUNTER'
-  ])
+    mounted() {
+        // For adding the token to axios header (add this only one time).
+        var token = document.head.querySelector('meta[name="csrf-token"]');
+        window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+    },
+    data() {
+        return {
+            form: {
+                name: '',
+                url: ''
+            }
+        }
+    },
+    methods: {
+        onSubmit() {
+            let data = this.form;
+
+            console.log(data);
+
+            axios.post('/api/social/store', {
+                name: data.name,
+                url: data.url
+            }).then(function(response) {
+                console.log(response);
+            }).catch(function(error) {
+                console.log(error);
+            })
+        }
+    }
 }
 
 </script>
