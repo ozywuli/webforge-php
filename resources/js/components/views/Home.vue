@@ -27,13 +27,13 @@ export default {
     },
     methods: {
         onSubmit() {
-            let data = this.form;
+            let formData = this.form;
 
-            console.log(data);
+            console.log(formData);
 
             axios.post('/api/social/store', {
-                name: data.name,
-                url: data.url
+                name: formData.name,
+                url: formData.url
             }).then(function(response) {
                 console.log(response);
             }).catch(function(error) {

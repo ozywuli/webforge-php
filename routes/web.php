@@ -18,6 +18,8 @@ Route::get('/', function() {
 Route::get('/login', 'HomeController@index')->name('home');
 Route::get('/register', 'HomeController@index')->name('home');
 
+Route::post('/social/store', 'SocialController@store');
+
 Route::get('/{catchall?}', function () {
     return view('vue');
 })->where('catchall', '^(?!api).*$')->name('administration');
