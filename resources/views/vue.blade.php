@@ -8,6 +8,8 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>Laravel</title>
+
+        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     </head>
     <body>
         <div id="vue-app"></div>
@@ -20,7 +22,7 @@
                 'csrfToken' => csrf_token(),
             ]); ?>
 
-            console.log(window.localStorage.getItem('passportToken'));
+            console.log(window.localStorage.getItem('passportToken'))
         </script>
         <script src="{{ mix('js/app.js') }}"></script>
     </body>

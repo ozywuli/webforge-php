@@ -16,10 +16,27 @@ class SocialController extends Controller
      */
     public function store(Request $request)
     {
-        $social = Social::create([
-            'name' => request('name'),
-            'url' => request('url')
-        ]);
+        $social = null;
+
+        if (Social::count() > 0) {
+            Social::firstOrFail()
+                ->update([
+                    'twitter' => request('twitter'),
+                    'facebook' => request('facebook'),
+                    'instagram' => request('instagram'),
+                    'email' => request('email')
+                ]);
+
+            $social = Social::get();
+        } else {
+            $social = Social::create([
+                'twitter' => request('twitter'),
+                'facebook' => request('facebook'),
+                'instagram' => request('instagram'),
+                'email' => request('email')
+            ]);
+        }
+
 
         if ($request->is('api/*')) {
             return response()->json($social);

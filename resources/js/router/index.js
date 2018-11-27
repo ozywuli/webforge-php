@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import Home from '../components/views/Home';
+import Social from '../components/views/Social';
 import Questionnaire from '../components/views/Questionnaire';
 
 // Use Vue-Router in Vue
@@ -11,6 +12,10 @@ const routes = [
     {
         path: '/dashboard',
         component: Home
+    },
+    {
+        path: '/dashboard/social',
+        component: Social
     },
     {
         path: '/dashboard/questionnaire/:id',

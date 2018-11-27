@@ -36,8 +36,10 @@ class SocialController extends Controller
     public function store(Request $request)
     {
         $social = Social::create([
-            'name' => request('name'),
-            'url' => request('url')
+            'twitter' => request('twitter'),
+            'facebook' => request('facebook'),
+            'instagram' => request('instagram'),
+            'email' => request('email')
         ]);
 
         if ($request->is('api/*')) {

@@ -15,8 +15,10 @@ class CreateSocialsTable extends Migration
     {
         Schema::create('socials', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('url');
+            $table->string('twitter');
+            $table->string('facebook');
+            $table->string('instagram');
+            $table->string('email');
             $table->timestamps();
         });
     }

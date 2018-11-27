@@ -1,21 +1,13 @@
 <template>
     <div class="home">
-        <el-form>
-            <el-input placeholder="Name" v-model="form.name"></el-input>
-            <el-input placeholder="URL" v-model="form.url"></el-input>
-            <el-button type="primary" @click="onSubmit">Create</el-button>
-        </el-form>
+
     </div>
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
     mounted() {
-        // For adding the token to axios header (add this only one time).
-        var token = document.head.querySelector('meta[name="csrf-token"]');
-        window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+
     },
     data() {
         return {
@@ -26,20 +18,7 @@ export default {
         }
     },
     methods: {
-        onSubmit() {
-            let formData = this.form;
 
-            console.log(formData);
-
-            axios.post('/api/social/store', {
-                name: formData.name,
-                url: formData.url
-            }).then(function(response) {
-                console.log(response);
-            }).catch(function(error) {
-                console.log(error);
-            })
-        }
     }
 }
 
