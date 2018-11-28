@@ -18,6 +18,7 @@ class CreateMetasTable extends Migration
             $table->string('name');
             $table->string('title');
             $table->string('description');
+            $table->string('keywords');
             $table->timestamps();
         });
     }

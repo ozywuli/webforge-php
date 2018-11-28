@@ -1,8 +1,14 @@
 <template>
     <div class="social">
         <el-form>
-            <el-input placeholder="Name" v-model="form.name"></el-input>
-            <el-input placeholder="URL" v-model="form.url"></el-input>
+            <el-input placeholder="Twitter url" v-model="form.twitter"></el-input>
+            
+            <el-input placeholder="Facebook url" v-model="form.facebook"></el-input>
+            
+            <el-input placeholder="Instagram url" v-model="form.instagram"></el-input>
+            
+            <el-input placeholder="Email" v-model="form.email"></el-input>
+
             <el-button type="primary" @click="onSubmit">Create</el-button>
         </el-form>
     </div>
@@ -13,15 +19,15 @@ import axios from 'axios';
 
 export default {
     mounted() {
-        // For adding the token to axios header (add this only one time).
-        var token = document.head.querySelector('meta[name="csrf-token"]');
-        window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+        console.log(JSON.parse(window.localStorage.getItem('passportToken')).token);
     },
     data() {
         return {
             form: {
-                name: '',
-                url: ''
+                twitter: '',
+                facebook: '',
+                instagram: '',
+                email: ''
             }
         }
     },
@@ -30,8 +36,10 @@ export default {
             let formData = this.form;
 
             axios.post('/api/social', {
-                name: formData.name,
-                url: formData.url
+                twitter: formData.twitter,
+                facebook: formData.facebook,
+                instagram: formData.instagram,
+                email: formData.email
             }, {
                 headers: {
                     'Authorization': 'Bearer ' + JSON.parse(window.localStorage.getItem('passportToken')).token

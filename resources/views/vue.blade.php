@@ -18,9 +18,6 @@
 
         <script>
             window.localStorage.setItem('passportToken', JSON.stringify({!! session('passportToken') !!}));
-            window.myToken =  <?php echo json_encode([
-                'csrfToken' => csrf_token(),
-            ]); ?>
 
             console.log(window.localStorage.getItem('passportToken'))
         </script>
