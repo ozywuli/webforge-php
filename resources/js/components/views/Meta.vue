@@ -43,8 +43,26 @@ export default {
             }
         }
     },
-    onSubmit() {
-        console.log('save');
+    methods: {
+        onSubmit() {
+            let formData = this.form;
+
+            axios.post('/api/meta', {
+                name: formData.name,
+                title: formData.title,
+                description: formData.description,
+                keywords: formData.keywords
+            }, {
+                headers: {
+                    'Authorization': 'Bearer ' + JSON.parse(window.localStorage.getItem('passportToken')).token
+                }
+            }).then(function(response) {
+                console.log(response);
+            }).catch(function(error) {
+                console.log(error);
+            })
+            
+        }
     }
 }
 </script>
